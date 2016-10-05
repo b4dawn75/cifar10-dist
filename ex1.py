@@ -8,6 +8,11 @@ For example,
 when given grad_and_vars = [[1, 5], [3, 7]]
 
 The result should be 2.
+
+tf.expand_dims()
+tf.concat()
+tf.reduce_mean()
+
 """
 
 import tensorflow as tf
