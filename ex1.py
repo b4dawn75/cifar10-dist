@@ -14,7 +14,6 @@ import tensorflow as tf
 
 grad_and_vars = [[1.1, 2.0], [0.7, 0.9], [0.6, 0.4], [1.2, 5.4]]
 
-# for grad_and_vars in zip(*tower_grads):
 grads = []
 
 for g, _ in grad_and_vars:
