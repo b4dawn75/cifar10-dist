@@ -56,7 +56,6 @@ tf.app.flags.DEFINE_integer('save_interval_secs', 60,
                             'Save interval seconds.')
 tf.app.flags.DEFINE_integer('save_summaries_secs', 20,
                             'Save summaries interval seconds.')
-tf.app.flags.Define_
 
 
 def train(target, cluster_spec):
