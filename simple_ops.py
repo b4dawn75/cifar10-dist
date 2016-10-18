@@ -74,3 +74,46 @@ with tf.Session() as sess:
     result = sess.run(product)
     print(result)
     # ==> [[ 12.]]
+
+
+def mysum(a, b, name=None):
+    with tf.op_scope([a, b], name, "mysum") as scope:
+        v = tf.get_variable("v", 1)
+        v2 = tf.Variable([0], name="v2")
+        assert v.name == "v:0", v.name
+        assert v2.name == "mysum/v2:0", v2.name
+        return tf.add(a, b)
+
+
+def mysum2(a, b, name=None):
+    with tf.variable_op_scope([a,b],name,"mysum2") as scope:
+        v = tf.get_variable("v", 1)
+        v2 = tf.Variable([0], name="v2")
+        assert v.name == "mysum2/v:0", v.name
+        assert v2.name == "mysum2/v2:0", v2.name
+        return tf.add(a, b)
+
+with tf.Graph().as_default():
+    op = mysum(tf.Variable(1), tf.Variable(2))
+    op2 = mysum2(tf.Variable(1), tf.Variable(2))
+    assert op.name == 'mysum/Add:0', op.name
+    assert op2.name == 'mysum2/Add:0', op2.name
+
+
+with tf.Graph().as_default():
+    with tf.name_scope("name_scope") as scope:
+        v = tf.get_variable("v", [1])
+        op = tf.add(v, v)
+        v2 = tf.Variable([0], name="v2")
+        assert v.name == "v:0", v.name
+        assert op.name == "name_scope/Add:0", op.name
+        assert v2.name == "name_scope/v2:0", v2.name
+
+with tf.Graph().as_default():
+    with tf.variable_scope("name_scope") as scope:
+        v = tf.get_variable("v", [1])
+        op = tf.add(v, v)
+        v2 = tf.Variable([0], name="v2")
+        assert v.name == "name_scope/v:0", v.name
+        assert op.name == "name_scope/Add:0", op.name
+        assert v2.name == "name_scope/v2:0", v2.name
