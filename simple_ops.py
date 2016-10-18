@@ -76,7 +76,6 @@ with tf.Session() as sess:
     # ==> [[ 12.]]
 
 
-<<<<<<< HEAD
 def mysum(a, b, name=None):
     with tf.op_scope([a, b], name, "mysum") as scope:
         v = tf.get_variable("v", 1)
@@ -118,20 +117,4 @@ with tf.Graph().as_default():
         assert v.name == "name_scope/v:0", v.name
         assert op.name == "name_scope/Add:0", op.name
         assert v2.name == "name_scope/v2:0", v2.name
-=======
-grad_and_vars = [[1.1, 2.0], [0.7, 0.9], [0.6, 0.4], [1.2, 5.4]]
 
-# for grad_and_vars in zip(*tower_grads):
-grads = []
-
-for g, _ in grad_and_vars:
-    expanded_g = tf.expand_dims(g, 0)
-
-    grads.append(expanded_g)
-
-grad = tf.concat(0, grads)
-grad = tf.reduce_mean(grad, 0)
-
-sess = tf.Session()
-print(sess.run(grad))
->>>>>>> 9c3275a8cd704a0797a5752b52b6ea6d1367aab9
