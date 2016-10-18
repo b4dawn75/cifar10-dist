@@ -65,7 +65,8 @@ def train():
         global_step = tf.Variable(0, trainable=False)
 
         # Get images and labels for CIFAR-10.
-        images, labels = cifar10.distorted_inputs()
+        # images, labels = cifar10.distorted_inputs()
+        images, labels = cifar10.inputs(eval_data=False)
 
         # Build a Graph that computes the logits predictions from the
         # inference model.
